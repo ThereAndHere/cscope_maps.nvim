@@ -254,7 +254,7 @@ end
 
 local cscope = function(cmd, op, symbol)
 	-- Parse top level output and call appropriate functions
-	if cmd == "find" then
+	if cmd == "find" or cmd == "f" then
 		cscope_find(op, symbol)
 	elseif cmd == "build" then
 		cscope_build()
