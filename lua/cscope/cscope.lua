@@ -114,7 +114,14 @@ local cscope_find_helper = function(op_n, op_s, symbol)
 	local db_file = vim.g.cscope_maps_db_file or M.opts.db_file
 	local cmd = M.opts.exec
 
-	if cmd == "cscope" then
+  if vim.g.cscope_maps_use_gtags then
+    db_file = vim.g.cscope_maps_gtags_db_path .. "GTAGS"
+    cmd = "GTAGSROOT=" .. vim.g.cscope_maps_gtags_root .. " GTAGSDBPATH=" .. vim.g.cscope_maps_gtags_db_path .. " gtags-cscope"
+    if op_s == "d" then
+			print("cscope: 'd' operation is not available for gtags-cscope")
+			return RC.INVALID_OP
+		end
+  elseif cmd == "cscope" then
 		cmd = cmd .. " " .. "-f " .. db_file
 	elseif cmd == "gtags-cscope" then
 		if op_s == "d" then
@@ -295,6 +302,9 @@ M.setup = function(opts)
 	-- e.g. vim-gutentags can use it for when
 	--	vim.g.gutentags_cache_dir is enabled.
 	vim.g.cscope_maps_db_file = nil
+  vim.g.cscope_maps_use_gtags = 0
+  vim.g.cscope_maps_gtags_root = nil
+  vim.g.cscope_maps_gtags_db_path = nil
 
 	if M.opts.picker == "telescope" then
 		cscope_picker = require("cscope.pickers.telescope")
