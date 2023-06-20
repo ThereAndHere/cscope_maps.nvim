@@ -115,7 +115,7 @@ local cscope_find_helper = function(op_n, op_s, symbol)
 	local cmd = M.opts.exec
 
   if vim.g.cscope_maps_use_gtags then
-    db_file = vim.g.cscope_maps_gtags_db_path .. "GTAGS"
+    db_file = vim.g.cscope_maps_gtags_db_path .. "/GTAGS"
     cmd = "GTAGSROOT=" .. vim.g.cscope_maps_gtags_root .. " GTAGSDBPATH=" .. vim.g.cscope_maps_gtags_db_path .. " gtags-cscope"
     if op_s == "d" then
 			print("cscope: 'd' operation is not available for gtags-cscope")
