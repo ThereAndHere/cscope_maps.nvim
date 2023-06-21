@@ -177,7 +177,9 @@ M.setup = function(opts)
 	end
 
 	-- Mappings
-	vim.api.nvim_set_keymap("n", "<C-]>", [[<cmd>exe "Cstag" expand("<cword>")<cr>]], keymap_opts)
+  if vim.g.cscope_maps_use_gtags == 1 then
+    vim.api.nvim_set_keymap("n", "<C-]>", [[<cmd>exe "Cstag" expand("<cword>")<cr>]], keymap_opts)
+  end
 
 	local ok, wk = pcall(require, "which-key")
 	if not ok then
