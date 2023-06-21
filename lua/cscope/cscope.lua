@@ -114,7 +114,7 @@ local cscope_find_helper = function(op_n, op_s, symbol)
 	local db_file = vim.g.cscope_maps_db_file or M.opts.db_file
 	local cmd = M.opts.exec
 
-  if vim.g.cscope_maps_use_gtags then
+  if vim.g.cscope_maps_use_gtags == 1 then
     db_file = vim.g.cscope_maps_gtags_db_path .. "/GTAGS"
     cmd = "GTAGSROOT=" .. vim.g.cscope_maps_gtags_root .. " GTAGSDBPATH=" .. vim.g.cscope_maps_gtags_db_path .. " gtags-cscope"
     if op_s == "d" then
